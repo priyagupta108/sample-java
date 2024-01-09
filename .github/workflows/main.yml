@@ -22,5 +22,4 @@ jobs:
           cache-dependency-path: 'pom.xml'
       - name: Build with Maven
         run: mvn clean install
-
         

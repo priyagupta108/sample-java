@@ -16,6 +16,6 @@ jobs:
       - name: Setup java
         uses: actions/setup-java@v4
         with:
-          distribution: '<distribution>'
+          distribution: 'oracle'
           java-version: ${{ matrix.java }}
       - run: java DemoApplication.java

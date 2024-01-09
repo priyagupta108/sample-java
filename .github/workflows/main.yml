@@ -19,7 +19,7 @@ jobs:
           distribution: 'oracle'
           java-version: ${{ matrix.java }}
           cache: "maven"
-          cache-dependency-path: 'pom.xml'
+          # cache-dependency-path: 'pom.xml'
       - name: Build with Maven
         run: mvn clean install
         

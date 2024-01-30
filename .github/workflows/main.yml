@@ -3,6 +3,7 @@ name: Java Multiple JDK Demo
 on:
   push:
     branches: [main]
+    
 jobs:
   build:
     runs-on: ubuntu-20.04 

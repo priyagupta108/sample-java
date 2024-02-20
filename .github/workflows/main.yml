@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'microsoft'
-          java-version: ${{ matrix.java }}
+          # java-version: ${{ matrix.java }}
           java-version-file: '.tool-versions'
           cache: "maven"
           check-latest: true

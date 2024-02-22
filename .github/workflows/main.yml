@@ -22,7 +22,7 @@ jobs:
           cache: "maven"
           check-latest: true
       - name: Setup java
-        uses: mahabaleshwars/setup-java@add-windowsArm64-support
+        uses: priya-kinthali/setup-java@tool-version-test
         with:
           distribution: 'microsoft'
           # java-version: ${{ matrix.java }}

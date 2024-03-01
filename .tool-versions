@@ -4,4 +4,5 @@ nodejs 17.0.5
 
 javatest v19.0.0
 javatest2 openjdk64-11.0
-java 11.0.0
+javatest3 11.0.0
+java 17.0.1+12.1

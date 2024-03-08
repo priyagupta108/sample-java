@@ -1,4 +1,4 @@
-name: Java Multiple JDK Demo
+name: Java-version Demo
 
 on:
   push:

@@ -14,16 +14,9 @@ jobs:
     name: Java ${{ matrix.Java }} sample
     steps:
       - uses: actions/checkout@v4
-      - name: Setup java action
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'microsoft'
-          # java-version: ${{ matrix.java }}
-          java-version-file: '.tool-versions'
-          cache: "maven"
-          check-latest: true
+      
       - name: Setup java
-        uses: priya-kinthali/setup-java@tool-version-test
+        uses: mahabaleshwars/setup-java@add-tool-version-file-support
         with:
           distribution: 'microsoft'
           # java-version: ${{ matrix.java }}

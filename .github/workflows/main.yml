@@ -1,7 +1,7 @@
-name: Java Multiple JDK Demo
+name: setup java 600
 
 on:
-  workflow_dispatch
+ push
     
     
 jobs:

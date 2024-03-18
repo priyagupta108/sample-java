@@ -3,7 +3,7 @@ name: setup java 600
 on:
  push
     
-    
+  
 jobs:
   build_4_0_0:
     runs-on: ubuntu-latest

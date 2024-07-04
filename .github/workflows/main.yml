@@ -17,4 +17,20 @@ jobs:
           distribution: "temurin"
           java-version: ${{ matrix.java_version }}
           cache: "gradle"
+      - name: Build and Test with Gradle
+        env:
+          # OSS_USER_TOKEN: ${{ secrets.OSS_USER_TOKEN }}
+          # OSS_USER_PASSWORD: ${{ secrets.OSS_USER_PASSWORD }}
+        run: ./gradlew build
+     
+      # - name: Report Coveralls (Windows)
+      #   if: startsWith(runner.os, 'Windows')
+      #   run: |
+      #     Invoke-WebRequest -Uri "https://github.com/coverallsapp/coverage-reporter/releases/latest/download/coveralls-windows.zip" -OutFile "coveralls-windows.zip"
+      #     Add-Type -AssemblyName System.IO.Compression.FileSystem
+      #     [System.IO.Compression.ZipFile]::ExtractToDirectory("coveralls-windows.zip", ".")
+      #     Remove-Item "coveralls-windows.zip"
+      #     Start-Process -FilePath ".\coveralls.exe" -ArgumentList "report build/reports/kover/report.xml" -NoNewWindow -Wait
+      #   env:
+      #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
      

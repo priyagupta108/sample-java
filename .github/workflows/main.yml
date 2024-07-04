@@ -1,29 +1,20 @@
-name: Java Multiple JDK Demo
-
-on:
-  workflow_dispatch:
-    
-    
+name: Konf CI
+on: [ push ]
 jobs:
   build:
-    runs-on: ubuntu-20.04 
+    name: Build on JDK ${{ matrix.java_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        java: [ '17']
-        
-    name: Java ${{ matrix.Java }} sample
+        # Only covers Java 21 because the publishing plugin doesn't work on lesser versions
+        java_version: [ 21 ]
+        os: [ ubuntu-latest, windows-latest, macOS-latest ]
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Setup java
-        uses: mahabaleshwars/setup-java@add-tool-version-file-support
+      - name: Set up JDK ${{ matrix.java_version }}
+        uses: actions/setup-java@v4
         with:
-          distribution: 'microsoft'
-          # java-version: ${{ matrix.java }}
-          java-version-file: '.tool-versions'
-          cache: "maven"
-          check-latest: true
-          # cache-dependency-path: 'pom.xml'
-      - name: Build with Maven
-        run: mvn clean install
-
+          distribution: "temurin"
+          java-version: ${{ matrix.java_version }}
+          cache: "gradle"
+     

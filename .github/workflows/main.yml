@@ -18,11 +18,12 @@ jobs:
           java-version: ${{ matrix.java_version }}
           cache: "gradle"
           
-      - name: Stop Gradle Daemon
-        run: ./gradlew --stop
+
 
       - name: Build without Daemon
         run: ./gradlew build
+      - name: Stop Gradle Daemon
+        run: ./gradlew --stop  
      
       # - name: Report Coveralls (Windows)
       #   if: startsWith(runner.os, 'Windows')

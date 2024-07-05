@@ -17,9 +17,12 @@ jobs:
           distribution: "temurin"
           java-version: ${{ matrix.java_version }}
           cache: "gradle"
-      - name: Build and Test with Gradle
-        run: ./gradlew clean build
-        # run: ./gradlew build --no-daemon
+          
+      - name: Stop Gradle Daemon
+        run: ./gradlew --stop
+
+      - name: Build without Daemon
+        run: ./gradlew build
      
       # - name: Report Coveralls (Windows)
       #   if: startsWith(runner.os, 'Windows')

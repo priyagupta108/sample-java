@@ -14,14 +14,13 @@ jobs:
       - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
           java-version: ${{ matrix.java_version }}
-          cache: "gradle"
+          distribution: 'zulu'
           
 
 
-      - name: Build without Daemon
-        run: ./gradlew build --no-daemon
+      # - name: Build without Daemon
+      #   run: ./gradlew build --no-daemon
       # - name: Stop Gradle Daemon
       #   run: ./gradlew --stop  
      

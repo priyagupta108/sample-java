@@ -1,32 +1,39 @@
-name: Java-version Demo
+name: Test all distributions with CRaC
 
 on:
   push:
-    branches: [main]
+  workflow_dispatch:
+
 jobs:
-  build:
-    runs-on: ubuntu-20.04 
+  test-java-crac:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '17'] 
-    name: Java ${{ matrix.Java }} sample
+        distribution: 
+          - temurin
+          - zulu
+          - adopt
+          - adopt-hotspot
+          - adopt-openj9
+          - liberica
+          - microsoft
+          - corretto
+          - semeru
+          - oracle
+          - dragonwell
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup java action
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'microsoft'
-          # java-version: ${{ matrix.java }}
-          java-version-file: '.java-version'
-          cache: "maven"
-          check-latest: true
-      - name: Setup java
-        uses: mahabaleshwars/setup-java@add-tool-version-file-support
-        with:
-          distribution: 'microsoft'
-          # java-version: ${{ matrix.java }}
-          java-version-file: '.java-version'
-          cache: "maven"
-          check-latest: true
-         
-      
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Java with CRaC
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        java-package: 'jdk+crac'
+        distribution: ${{ matrix.distribution }}
+
+    - name: Verify Java version
+      run: java -version
+
+    # - name: Run your tests
+    #   run: ./gradlew test  # Replace with your actual test command

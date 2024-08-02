@@ -11,28 +11,26 @@ jobs:
       matrix:
         distribution: 
           - temurin
-          # - zulu
+          - zulu
           - adopt
           - adopt-hotspot
           - adopt-openj9
-          # - liberica
+          - liberica
+          - microsoft
           - corretto
-        
-     
-        
+          - semeru
+          - oracle
+          - dragonwell
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Setup Java with CRaC
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
-        java-version: '17'
-        java-package: 'jdk'
+        java-version: '21'
+        java-package: 'jdk+crac'
         distribution: ${{ matrix.distribution }}
 
     - name: Verify Java version
       run: java -version
-
-    # - name: Run your tests
-    #   run: ./gradlew test  # Replace with your actual test command

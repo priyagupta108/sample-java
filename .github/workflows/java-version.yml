@@ -16,11 +16,10 @@ jobs:
           # - adopt-hotspot
           # - adopt-openj9
           - liberica
-          # - microsoft
           # - corretto
-          # - semeru
-          # - oracle
-          # - dragonwell
+        
+     
+        
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -29,8 +28,11 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '21'
-        java-package: 'jdk+fx'
+        java-package: 'jdk+crac'
         distribution: ${{ matrix.distribution }}
 
     - name: Verify Java version
       run: java -version
+
+    # - name: Run your tests
+    #   run: ./gradlew test  # Replace with your actual test command

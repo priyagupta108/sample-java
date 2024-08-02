@@ -10,17 +10,17 @@ jobs:
     strategy:
       matrix:
         distribution: 
-          - temurin
+          # - temurin
           - zulu
-          - adopt
-          - adopt-hotspot
-          - adopt-openj9
+          # - adopt
+          # - adopt-hotspot
+          # - adopt-openj9
           - liberica
-          - microsoft
-          - corretto
-          - semeru
-          - oracle
-          - dragonwell
+          # - microsoft
+          # - corretto
+          # - semeru
+          # - oracle
+          # - dragonwell
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4

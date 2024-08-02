@@ -10,13 +10,13 @@ jobs:
     strategy:
       matrix:
         distribution: 
-          # - temurin
-          - zulu
-          # - adopt
-          # - adopt-hotspot
-          # - adopt-openj9
-          - liberica
-          # - corretto
+          - temurin
+          # - zulu
+          - adopt
+          - adopt-hotspot
+          - adopt-openj9
+          # - liberica
+          - corretto
         
      
         
@@ -28,7 +28,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '17'
-        java-package: 'jdk+crac'
+        java-package: 'jdk'
         distribution: ${{ matrix.distribution }}
 
     - name: Verify Java version

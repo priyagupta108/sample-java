@@ -1,36 +1,32 @@
-name: Konf CI
-on: [ push ]
+name: Publish Maven package to GPR
+
+on:
+  push:
+    branches: [ "GPR" ]
+  workflow_dispatch:
+
 jobs:
   build:
-    name: Build on JDK ${{ matrix.java_version }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        # Only covers Java 21 because the publishing plugin doesn't work on lesser versions
-        java_version: [ 21 ]
-        os: [ ubuntu-latest, windows-latest, macOS-latest ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK ${{ matrix.java_version }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
-          java-version: ${{ matrix.java_version }}
-          cache: "gradle"
-      - name: Build and Test with Gradle
+          distribution: 'temurin'
+          java-version: '11'
+          
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Publish to GitHub Packages
+        run:  mvn --batch-mode deploy -X
         env:
-          # OSS_USER_TOKEN: ${{ secrets.OSS_USER_TOKEN }}
-          # OSS_USER_PASSWORD: ${{ secrets.OSS_USER_PASSWORD }}
-        run: ./gradlew build
-     
-      # - name: Report Coveralls (Windows)
-      #   if: startsWith(runner.os, 'Windows')
-      #   run: |
-      #     Invoke-WebRequest -Uri "https://github.com/coverallsapp/coverage-reporter/releases/latest/download/coveralls-windows.zip" -OutFile "coveralls-windows.zip"
-      #     Add-Type -AssemblyName System.IO.Compression.FileSystem
-      #     [System.IO.Compression.ZipFile]::ExtractToDirectory("coveralls-windows.zip", ".")
-      #     Remove-Item "coveralls-windows.zip"
-      #     Start-Process -FilePath ".\coveralls.exe" -ArgumentList "report build/reports/kover/report.xml" -NoNewWindow -Wait
-      #   env:
-      #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-     
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

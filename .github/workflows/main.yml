@@ -16,8 +16,8 @@ jobs:
           java-version: '11'
           distribution: 'sapmachine'
           server-id: ossrh
-          server-username: Rs1iL1A5
-          server-password: MZyVegKF/CfLc1fLrag/iskTiJqx3DKH30WWzL5eHl/T
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
       - name: Publish package
         run: mvn --batch-mode deploy
         env:

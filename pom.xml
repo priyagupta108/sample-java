@@ -35,38 +35,11 @@
 	</scm>
 
 
-  <build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.12.1</version>
-				<configuration>
-					<release>17</release>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.12</version>
-				<configuration>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<!-- attached to Maven test phase -->
-					
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+  
    
     <profiles>
 		<profile>
-			<id>release</id>
+			<id>ossrh</id>
 			<build>
 				<plugins>
 					<plugin>

@@ -26,7 +26,10 @@
   <developerConnection>scm:git:ssh://github.com:priyagupta108/sample-java.git</developerConnection>
   <url>https://github.com/priyagupta108/sample-java/tree/main</url>
  </scm>
-
+<properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+       
  <distributionManagement>
   <snapshotRepository>
    <id>ossrh</id>

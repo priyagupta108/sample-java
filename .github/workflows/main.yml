@@ -37,29 +37,7 @@ jobs:
         which gpg
         cat /home/runner/.m2/settings.xml
 
-    - name: "Check gpg setup on macOs"
-      if: runner.os == 'macOs'
-      shell: bash
-      run: |
-        which gpg
-        cat /Users/runner/.m2/settings.xml
-
-    - name: "Check gpg setup on Windows"
-      if: runner.os == 'Windows'
-      shell: powershell
-      run: |
-        where.exe gpg
-        cat C:\Users\runneradmin\.m2\settings.xml
-
-    - name: "Set maven-gpg-plugin.version to v${{ matrix.gpg-plugin-version }}"
-      shell: bash
-      run: |
-        ./mvnw --batch-mode --show-version versions:set-property -D "property=maven-gpg-plugin.version" -D "newVersion=${{ matrix.gpg-plugin-version }}"
-
-    - name: "Build and sign"
-      shell: bash
-      run: |
-        ./mvnw --batch-mode --show-version clean verify
+  
 
     - name: Publish to Apache Maven Central
       run: mvn -P release --batch-mode deploy -DskipTests

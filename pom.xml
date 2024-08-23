@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.priyagupta108</groupId>
-	<artifactId>filelize-java</artifactId>
-	<version>0.9.0-SNAPSHOT</version>
+	<artifactId>setup-test-java</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>filelize-java</name>
+	<name>setup-test-java</name>
 	<description>Filelize is a lightweight database designed to simplify writing and reading data into human-readable files, requiring just one line of code</description>
 	<url>https://github.com/priyagupta108/sample-java</url>
 
@@ -123,26 +123,24 @@
 							<doclint>none</doclint>
 						</configuration>
 					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>3.1.0</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
-						</configuration>
-					</plugin>
+					
+
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.6</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  
+
 				</plugins>
 			</build>
 		</profile>

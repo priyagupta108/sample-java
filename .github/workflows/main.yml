@@ -29,6 +29,6 @@ jobs:
     - name: Publish to Apache Maven Central
       run: mvn deploy -X
       env:
-        MAVEN_USERNAME: '+ZArALIw'
-        MAVEN_CENTRAL_TOKEN: 'HiFxjNaL7H9uvVzZ5W+w8ssoG5dAaJgw8D4Av1WzdvGg'
+        MAVEN_USERNAME: +ZArALIw
+        MAVEN_CENTRAL_TOKEN: HiFxjNaL7H9uvVzZ5W+w8ssoG5dAaJgw8D4Av1WzdvGg
         MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

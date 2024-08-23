@@ -19,7 +19,6 @@
   <developer>
   <name>priyagupta108</name>
   <email>priyagupta108@github.com</email>
-   
   </developer>
  </developers>
  <scm>
@@ -96,12 +95,7 @@
 								</goals>
 							</execution>
 						</executions>
-						<configuration>
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
-						</configuration>
+						
 					</plugin>
   </plugins>
  </build>

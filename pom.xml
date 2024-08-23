@@ -5,12 +5,12 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.gowridurgad</groupId>
-    <artifactId>priyagupta108-java</artifactId>
+    <artifactId>java-sapmachine</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Demo library</name>
     <description>demo</description>
-    <url>https://github.com/priyagupta108/sample-java</url>
+    <url>https://github.com/gowridurgad/java-sapmachine</url>
 
     <developers>
 		<developer>
@@ -28,9 +28,9 @@
 	</licenses>
 
    <scm>
-		<url>https://github.com/priyagupta108/sample-java</url>
-		<connection>scm:git:https://github.com/priyagupta108/sample-java.git</connection>
-		<developerConnection>scm:git:https://github.com/priyagupta108/sample-java.git</developerConnection>
+		<url>https://github.com/gowridurgad/java-sapmachine</url>
+		<connection>scm:git:https://github.com/gowridurgad/java-sapmachine.git</connection>
+		<developerConnection>scm:git:https://github.com/gowridurgad/java-sapmachine.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 

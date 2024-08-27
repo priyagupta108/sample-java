@@ -1,29 +1,25 @@
-name: Java Multiple JDK Demo
+name: Java CI with Semeru
 
-on:
-  workflow_dispatch:
-    
-    
+on: [push]
+
 jobs:
   build:
-    runs-on: ubuntu-20.04 
+    runs-on: macos-14
     strategy:
       matrix:
-        java: [ '17']
-        
-    name: Java ${{ matrix.Java }} sample
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Setup java
-        uses: mahabaleshwars/setup-java@add-tool-version-file-support
-        with:
-          distribution: 'microsoft'
-          # java-version: ${{ matrix.java }}
-          java-version-file: '.tool-versions'
-          cache: "maven"
-          check-latest: true
-          # cache-dependency-path: 'pom.xml'
-      - name: Build with Maven
-        run: mvn clean install
+        jdk: [8, 11, 17, 21]
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK ${{ matrix.jdk }}
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'semeru'
+        java-version: ${{ matrix.jdk }}
+
+    - name: Verify Java version
+      run: java -version
+
+   

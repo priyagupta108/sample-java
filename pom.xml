@@ -8,7 +8,7 @@
 	<packaging>jar</packaging>
 
 	<name>setup-test-java</name>
-	<description>Filelize is a lightweight database designed to simplify writing and reading data into human-readable files, requiring just one line of code</description>
+	<description>setup-test-java</description>
 	<url>https://github.com/priyagupta108/sample-java</url>
 
 	<developers>

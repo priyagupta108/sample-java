@@ -17,6 +17,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'semeru'
+        architecture: 'x64'
         java-version: ${{ matrix.jdk }}
 
     - name: Verify Java version

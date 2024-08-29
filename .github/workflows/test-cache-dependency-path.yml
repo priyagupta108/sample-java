@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - sapMachine
-
   workflow_dispatch:
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -13,17 +13,37 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         build-system: ['maven', 'gradle', 'sbt']
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Set up Java
-      uses: Shegox/setup-java@main
-      with:
-        distribution: 'sapmachine'
-        java-version: '21'
-        cache: ${{ matrix.build-system }}
-        cache-dependency-path: |
-          ${{ matrix.build-system == 'maven' && '**/pom.xml' }}
-          ${{ matrix.build-system == 'gradle' && '*.gradle*' }}
-          ${{ matrix.build-system == 'sbt' && 'build.sbt' }}
-    - name: Verify Java version
-      run: java -version
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java with Maven cache
+        if: matrix.build-system == 'maven'
+        uses: Shegox/setup-java@main
+        with:
+          distribution: 'sapmachine'
+          java-version: '21'
+          cache: 'maven'
+          cache-dependency-path: 'pom.xml'
+
+      - name: Set up Java with Gradle cache
+        if: matrix.build-system == 'gradle'
+        uses: Shegox/setup-java@main
+        with:
+          distribution: 'sapmachine'
+          java-version: '21'
+          cache: 'gradle'
+          cache-dependency-path: |
+            *.gradle*
+            **/gradle-wrapper.properties
+
+      - name: Set up Java with sbt cache
+        if: matrix.build-system == 'sbt'
+        uses: Shegox/setup-java@main
+        with:
+          distribution: 'sapmachine'
+          java-version: '21'
+          cache: 'sbt'
+          cache-dependency-path: build.sbt
+
+      - name: Verify Java version
+        run: java -version

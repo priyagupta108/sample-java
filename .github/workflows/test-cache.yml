@@ -10,9 +10,17 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        cache: ['maven']
+        os: [ubuntu-latest, windows-latest, macos-latest] # Include macos-latest for all except where overridden
+        build-system: ['maven', 'gradle', 'sbt']
+        include:
+          - build-system: 'sbt'
+            os: macos-12 # Override to use macOS-12 specifically for SBT builds
+        exclude:
+          - build-system: 'sbt'
+            os: macos-latest # Exclude macos-latest specifically for SBT builds
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,4 +46,3 @@ jobs:
 
       - name: Verify Java version
         run: java -version
-        

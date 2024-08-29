@@ -12,6 +12,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         build-system: ['maven', 'gradle', 'sbt']
+        include:
+          - build-system: 'sbt'
+            os: macos-12 # Override to use macOS-12 specifically for SBT builds
+        exclude:
+          - build-system: 'sbt'
+            os: macos-latest # Exclude macos-latest specifically for SBT builds
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

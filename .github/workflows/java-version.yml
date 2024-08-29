@@ -29,7 +29,7 @@ jobs:
         echo JDK=${archive%%.tar.gz} >> $GITHUB_ENV
 
     - name: Display JAVA_HOME content
-      run: ls -la $JAVA_HOME/lib/criu
+      run: ls -la $JDK/lib/criu
 
 
     - name: Verify Java version

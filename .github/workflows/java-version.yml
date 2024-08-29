@@ -25,7 +25,7 @@ jobs:
         url=https://cdn.azul.com/zulu/bin/zulu17.44.17-ca-crac-jdk17.0.8-linux_x64.tar.gz
         archive=${url##*/}
         curl -LO $url
-        sudo tar -axf $archive
+        tar -axf $archive
         echo JDK=${archive%%.tar.gz} >> $GITHUB_ENV
 
     - name: Display JAVA_HOME content

@@ -1,8 +1,8 @@
 name: Test cache option with dependency paths 'maven', 'gradle', 'sbt'
 on:
-  push:
-    branches:
-      - sapMachine
+  # push:
+  #   branches:
+  #     - sapMachine
   workflow_dispatch:
 
 jobs:

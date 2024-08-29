@@ -1,4 +1,5 @@
-name: Test Java Supported distributions
+name: Test java-version-file
+
 
 on:
   # push:

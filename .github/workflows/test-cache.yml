@@ -30,7 +30,7 @@ jobs:
         with:
           distribution: 'sapmachine'
           java-version: '11'
-          cache: ${{ matrix.cache }}
+          cache: ${{ matrix.build-system }}
 
       # - name: Build with Maven
       #   if: matrix.build-system == 'maven'

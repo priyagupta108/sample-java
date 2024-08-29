@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        cache: ['maven', 'gradle', 'sbt' ]
+        cache: ['maven']
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -24,6 +24,9 @@ jobs:
         distribution: 'sapmachine'
         java-version: '21'
         cache: ${{ matrix.cache }}
+
+     - name: Build with Maven
+       run: mvn -B package --file pom.xml     
 
     - name: Verify Java version
       run: java -version

@@ -20,7 +20,7 @@ jobs:
     - name: Set up Java
       uses: Shegox/setup-java@main
       with:
-        distribution: 'adopt'
+        distribution: 'sapmachine'
         java-version: '21'
         check-latest: true
 

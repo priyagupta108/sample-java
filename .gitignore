@@ -180,7 +180,7 @@ gradle-app.setting
 
 private.properties
 .vscode
-.java-version
+# .java-version
 act
 *.log
 

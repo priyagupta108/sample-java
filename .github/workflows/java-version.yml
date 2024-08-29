@@ -24,12 +24,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup Java with CRaC
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        java-package: 'jdk+crac'
-        distribution: ${{ matrix.distribution }}
+    - name: Download JDK
+      run: |
+        url=https://cdn.azul.com/zulu/bin/zulu17.44.17-ca-crac-jdk17.0.8-linux_x64.tar.gz
+        archive=${url##*/}
+        curl -LO $url
+        sudo tar -axf $archive
+        echo JDK=${archive%%.tar.gz} >> $GITHUB_ENV
+
+    - name: Display JAVA_HOME content
+      run: ls -la $JAVA_HOME/lib/criu
+
 
     - name: Verify Java version
       run: java -version

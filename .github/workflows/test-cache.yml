@@ -29,7 +29,7 @@ jobs:
         uses: gowridurgad/setup-java-fork@testing-snap
         with:
           distribution: 'sapmachine'
-          java-version: '21'
+          java-version: '11'
           cache: ${{ matrix.cache }}
 
       # - name: Build with Maven

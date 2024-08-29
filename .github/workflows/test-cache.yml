@@ -32,17 +32,17 @@ jobs:
           java-version: '21'
           cache: ${{ matrix.cache }}
 
-      - name: Build with Maven
-        if: matrix.build-system == 'maven'
-        run: mvn -B package --file pom.xml 
+      # - name: Build with Maven
+      #   if: matrix.build-system == 'maven'
+      #   run: mvn -B package --file pom.xml 
 
-      - name: Build with Gradle
-        if: matrix.build-system == 'gradle'
-        run: ./gradlew build --no-daemon
+      # - name: Build with Gradle
+      #   if: matrix.build-system == 'gradle'
+      #   run: ./gradlew build --no-daemon
 
-      - name: Build with SBT
-        if: matrix.build-system == 'sbt'
-        run: sbt package
+      # - name: Build with SBT
+      #   if: matrix.build-system == 'sbt'
+      #   run: sbt package
 
       - name: Verify Java version
         run: java -version

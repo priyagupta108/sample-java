@@ -23,7 +23,7 @@ jobs:
         cache: ${{ matrix.build-system }}
         cache-dependency-path: |
           ${{ matrix.build-system == 'maven' && '**/pom.xml' }}
-          ${{ matrix.build-system == 'gradle' && '**/*.gradle*' }}
-          ${{ matrix.build-system == 'sbt' && '**/build.sbt' }}
+          ${{ matrix.build-system == 'gradle' && '*.gradle*' }}
+          ${{ matrix.build-system == 'sbt' && 'build.sbt' }}
     - name: Verify Java version
       run: java -version

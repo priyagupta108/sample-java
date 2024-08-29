@@ -29,7 +29,7 @@ jobs:
         uses: Shegox/setup-java@main
         with:
           distribution: 'sapmachine'
-          java-version: '11'
+          java-version: '21'
           cache: ${{ matrix.build-system }}
 
       - name: Build with Maven

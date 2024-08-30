@@ -19,7 +19,7 @@ jobs:
       uses: Shegox/setup-java@main
       with:
         distribution: 'sapmachine'
-        java-version: '11'
+        java-version: '21'
 
     - name: Build with Gradle
       run: gradle build

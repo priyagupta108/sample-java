@@ -22,9 +22,9 @@ jobs:
         with:
           distribution: 'sapmachine'
           java-version: |
-            8
+            21
             11
-            15
+            17
 
       - name: Verify JDK 8
         run: java -version

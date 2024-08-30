@@ -1,9 +1,9 @@
 name: Test Install multiple JDKs
 
 on:
-  push:
-    branches:
-      - sapMachine
+  # push:
+  #   branches:
+  #     - sapMachine
   workflow_dispatch:
 
 jobs:

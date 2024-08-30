@@ -23,7 +23,7 @@ jobs:
       with:
         distribution: 'sapmachine'
         java-version: ${{ matrix.java-version }}
-        architecture: x64
+        architecture: x86
 
     - name: Verify Java version
       run: java -version

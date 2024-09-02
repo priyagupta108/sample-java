@@ -22,7 +22,7 @@ jobs:
       with:
         distribution: 'sapmachine'
         java-version: '21'
-        java-package: 'jdk'
+        java-package: 'jre'
 
     - name: Verify Java version
       run: java -version

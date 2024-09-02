@@ -1,9 +1,9 @@
 name: Test PublishinG to GPR using Gradle
 
 on:
-  push:
-    branches:
-      - sapMachine
+  # push:
+  #   branches:
+  #     - sapMachine
 
   workflow_dispatch:
 

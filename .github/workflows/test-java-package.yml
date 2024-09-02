@@ -1,9 +1,9 @@
 name: Test java-package input
 
 on:
-  # push:
-  #   branches:
-  #     - sapMachine
+  push:
+    branches:
+      - sapMachine
 
   workflow_dispatch:
 
@@ -26,5 +26,3 @@ jobs:
 
     - name: Verify Java version
       run: java -version
-
-    

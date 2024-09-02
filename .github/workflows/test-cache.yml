@@ -1,4 +1,4 @@
-name: Test actions/cache with 'maven', 'gradle', 'sbt'
+name: Test cache option
 
 on:
   # push:
@@ -30,35 +30,7 @@ jobs:
         with:
           distribution: 'sapmachine'
           java-version: '21'
-          
-
-      - name: Cache Maven packages
-        if: matrix.build-system == 'maven'
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-    
-      - name: Cache Gradle packages
-        if: matrix.build-system == 'gradle'
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-           ${{ runner.os }}-gradle-
-      - name: Cache SBT packages
-        if: matrix.build-system == 'sbt'
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.sbt
-          key: ${{ runner.os }}-sbt-${{ hashFiles('**/*.sbt', '**/build.properties', '**/plugins.sbt') }}
-          restore-keys: |
-            ${{ runner.os }}-sbt-
+          cache: ${{ matrix.build-system }}
 
       - name: Build with Maven
         if: matrix.build-system == 'maven'

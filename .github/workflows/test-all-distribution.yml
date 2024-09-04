@@ -1,0 +1,43 @@
+name: Test distributions cache
+
+on:
+  push:
+    branches:
+      - sapMachine
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macos-latest] # Include macos-latest for all except where overridden
+        build-system: ['maven', 'gradle', 'sbt']
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell']
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: ${{ matrix.distribution }}
+          cache: ${{ matrix.build-system }}
+          java-version: '21'
+
+      - name: Build with Maven
+        if: matrix.build-system == 'maven'
+        run: mvn -B package --file pom.xml 
+
+      - name: Build with Gradle
+        if: matrix.build-system == 'gradle'
+        run: ./gradlew build --no-daemon
+
+      - name: Build with SBT
+        if: matrix.build-system == 'sbt'
+        run: sbt package
+
+      - name: Verify Java version
+        run: java -version

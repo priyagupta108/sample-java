@@ -16,7 +16,7 @@ jobs:
       uses: mahabaleshwars/setup-java-fniephaus-graalvm@main
       with: # running setup-java again overwrites the settings.xml
         distribution: 'graalvm'
-        java-version: '11'
+        java-version: '17'
         server-id: central # Value of the distributionManagement/repository/id field of the pom.xml
         server-username: MAVEN_USERNAME # env variable for username in deploy
         server-password: MAVEN_CENTRAL_TOKEN # env variable for token in deploy

@@ -8,25 +8,39 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up Java
-        uses: Shegox/setup-java@main
-        with:
-          distribution: 'sapmachine'
-          java-version: '11'
-          
+    - name: Set up Apache Maven Central
+      uses: gowridurgad/setup-java-fork@testing-snap
+      with: # running setup-java again overwrites the settings.xml
+        distribution: 'sapmachine'
+        java-version: '11'
+        server-id: central # Value of the distributionManagement/repository/id field of the pom.xml
+        server-username: MAVEN_USERNAME # env variable for username in deploy
+        server-password: MAVEN_CENTRAL_TOKEN # env variable for token in deploy
+        gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+    - name: "Check gpg setup"
+      shell: bash
+      run: |
+        gpg --version
+        gpg --list-keys
+        gpg --list-secret-keys
 
-      - name: Publish to GitHub Packages
-        run:  mvn --batch-mode deploy -X
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: "Check gpg setup on Linux"
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        which gpg
+        cat /home/runner/.m2/settings.xml
+
+
+    - name: Publish to Apache Maven Central
+      run: mvn -P release --batch-mode deploy -DskipTests
+      env:
+        MAVEN_USERNAME: +ZArALIw
+        MAVEN_CENTRAL_TOKEN: HiFxjNaL7H9uvVzZ5W+w8ssoG5dAaJgw8D4Av1WzdvGg
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

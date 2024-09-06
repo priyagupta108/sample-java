@@ -41,6 +41,6 @@ jobs:
     - name: Publish to Apache Maven Central
       run: mvn -P release --batch-mode deploy -DskipTests
       env:
-        MAVEN_USERNAME: 9egi2z+h
-        MAVEN_CENTRAL_TOKEN: fypXmBUXe9ryxHZ+nQoJm5w7x18Yckd5D9RHJuQi79GT
+        MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+        MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

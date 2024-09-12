@@ -1,26 +1,19 @@
-name: Java CI with Semeru
-
-on: [push]
-
+name: CI
+on:
+  push:
+    branches: [ main ]
 jobs:
-  build:
-    runs-on: macos-14
-    strategy:
-      matrix:
-        jdk: [8, 11, 17, 21]
-
+  container-test-job:
+    runs-on: ubuntu-latest
+    container:
+      image: node:18
+      env:
+        NODE_ENV: development
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/volume_mount
+      options: --cpus 1
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up JDK ${{ matrix.jdk }}
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'semeru'
-        architecture: 'x64'
-        java-version: ${{ matrix.jdk }}
-
-    - name: Verify Java version
-      run: java -version
-
-   
+      - name: Check for dockerenv file
+        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)

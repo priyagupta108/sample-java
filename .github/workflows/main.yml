@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 jobs:
   container-test-job:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     container:
       image: python:3
       env:

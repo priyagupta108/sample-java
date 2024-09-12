@@ -23,9 +23,9 @@ jobs:
         run: |
           apt-get update
           apt-get install -y lsb-release   
-      # - name: Create /etc/lsb-release
-      #   run: |
-      #    echo "DISTRIB_RELEASE=22.04" | sudo tee -a /etc/lsb-release
+      - name: Create /etc/lsb-release
+        run: |
+         echo "DISTRIB_RELEASE=22.04" | sudo tee -a /etc/lsb-release
       - name: setup-python
         uses: actions/setup-python@v5
         with:

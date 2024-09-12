@@ -9,6 +9,7 @@ jobs:
       image: python:3
       env:
         NODE_ENV: development
+        PIP_ROOT_USER_ACTION: ignore
       ports:
         - 80
       volumes:
@@ -23,3 +24,5 @@ jobs:
         with:
           python-version: 3.12.4
           
+      - name: Print environment variables
+        run: env

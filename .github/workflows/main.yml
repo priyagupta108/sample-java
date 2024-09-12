@@ -19,10 +19,17 @@ jobs:
       - name: Check for dockerenv file
         run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
 
+      - name: Install lsb-release
+        run: |
+          apt-get update
+          apt-get install -y lsb-release   
+      # - name: Create /etc/lsb-release
+      #   run: |
+      #    echo "DISTRIB_RELEASE=22.04" | sudo tee -a /etc/lsb-release
       - name: setup-python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.12
+          python-version: 3.12.4
           
       - name: Print environment variables
         run: env

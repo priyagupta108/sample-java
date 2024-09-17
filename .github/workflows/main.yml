@@ -10,26 +10,26 @@ on:
 jobs:
   test:
     runs-on: self-hosted
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine']
+    strategy:
+      fail-fast: false
+      matrix:
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine']
         
     steps:
-      - name: 	cache clear
-        run: |
-          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-          mkdir -p "${{ runner.tool_cache }}"
+      # - name: 	cache clear
+      #   run: |
+      #     mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #     mkdir -p "${{ runner.tool_cache }}"
 
-      # - name: Checkout code
-      #   uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # - name: Set up Java
-      #   uses: priyagupta108/setup-java@winZip
-      #   with:
-      #     distribution: ${{ matrix.distribution }}
-      #     java-version: '21'
+      - name: Set up Java
+        uses: priyagupta108/setup-java@winZip
+        with:
+          distribution: ${{ matrix.distribution }}
+          java-version: '21'
   
 
-      # - name: Verify Java version
-      #   run: java -version
+      - name: Verify Java version
+        run: java -version

@@ -1,35 +1,29 @@
-name: CI
+name: Test java Windows zip issue
+
 on:
   push:
-    branches: [ main ]
-jobs:
-  container-test-job:
-    runs-on: ubuntu-latest
-    container:
-      image: python:3
-      env:
-        NODE_ENV: development
-        PIP_ROOT_USER_ACTION: ignore
-      ports:
-        - 80
-      volumes:
-        - my_docker_volume:/volume_mount
-      options: --cpus 1
-    steps:
-      - name: Check for dockerenv file
-        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+    branches:
+      - main
+  workflow_dispatch:
 
-      - name: Install lsb-release
-        run: |
-          apt-get update
-          apt-get install -y lsb-release   
-      - name: Create /etc/lsb-release
-        run: |
-         echo "DISTRIB_RELEASE=22.04" |  tee -a /etc/lsb-release
-      - name: setup-python
-        uses: actions/setup-python@v5
+jobs:
+  test:
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine']
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          python-version: 3.12.4
-          
-      - name: Print environment variables
-        run: env
+          distribution: ${{ matrix.distribution }}
+          java-version: '21'
+  
+
+      - name: Verify Java version
+        run: java -version

@@ -55,7 +55,7 @@ jobs:
         distribution: 'corretto'
         java-version: '11'
         # tried overwrite-settings: false  and also true.
-        overwrite-settings: true
+        overwrite-settings: false
         check-latest: true
         cache: maven
 

@@ -48,26 +48,39 @@ jobs:
     runs-on: [ self-hosted, windows10-Enter ]
 
     steps:
-    - name: Install PowerShell
+    # - name: Install PowerShell
+    #   run: |
+    #     Invoke-WebRequest -Uri https://github.com/PowerShell/PowerShell/releases/download/v7.4.5/PowerShell-7.4.5-win-x64.msi -OutFile PowerShell-7.4.5-win-x64.msi
+    #     Start-Process msiexec.exe -ArgumentList '/i PowerShell-7.4.5-win-x64.msi /quiet' -Wait
+    #     Remove-Item -Force PowerShell-7.4.5-win-x64.msi
+    #   shell: powershell
+
+    # - name: Update PATH
+    #   run: |
+    #     $env:PATH = 'C:\Program Files\PowerShell\7;' + [System.Environment]::GetEnvironmentVariable('PATH','Machine')
+    #     [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, 'Machine')
+    #   shell: powershell
+
+    # - name: Restart Runner
+    #   run: Restart-Computer -Force
+    #   shell: powershell
+
+    # - name: Verify PowerShell Installation
+    #   run: 'C:\Program Files\PowerShell\7\pwsh.exe -Command $PSVersionTable.PSVersion'
+    #   shell: powershell
+
+    - name: Install PowerShell 
+      shell: powershell
       run: |
-        Invoke-WebRequest -Uri https://github.com/PowerShell/PowerShell/releases/download/v7.4.5/PowerShell-7.4.5-win-x64.msi -OutFile PowerShell-7.4.5-win-x64.msi
-        Start-Process msiexec.exe -ArgumentList '/i PowerShell-7.4.5-win-x64.msi /quiet' -Wait
-        Remove-Item -Force PowerShell-7.4.5-win-x64.msi
-      shell: powershell
-
-    - name: Update PATH
-      run: |
-        $env:PATH = 'C:\Program Files\PowerShell\7;' + [System.Environment]::GetEnvironmentVariable('PATH','Machine')
-        [System.Environment]::SetEnvironmentVariable('PATH', $env:PATH, 'Machine')
-      shell: powershell
-
-    - name: Restart Runner
-      run: Restart-Computer -Force
-      shell: powershell
-
-    - name: Verify PowerShell Installation
-      run: 'C:\Program Files\PowerShell\7\pwsh.exe -Command $PSVersionTable.PSVersion'
-      shell: powershell
+            # Install Chocolatey
+            Set-ExecutionPolicy Bypass -Scope Process -Force
+            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+            iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+            echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+        
+            # Install PowerShell
+            choco install powershell-core -y
+            echo "C:\Program Files\PowerShell\7" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
 
     - name: Setup Java Corretto
       uses: actions/setup-java@v4

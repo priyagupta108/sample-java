@@ -1,9 +1,9 @@
 name: Test java Windows zip issue
 
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
   workflow_dispatch:
   
 
@@ -23,9 +23,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
-       - name: Install PowerShell 
-         shell: powershell
-         run: |
+      - name: Install PowerShell 
+        shell: powershell
+        run: |
               # Install Chocolatey
               Set-ExecutionPolicy Bypass -Scope Process -Force
               [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072

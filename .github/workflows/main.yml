@@ -11,7 +11,7 @@ jobs:
   test:
     runs-on: [self-hosted, winx64]
     strategy:
-      # fail-fast: false
+      fail-fast: false
       matrix:
         distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
         

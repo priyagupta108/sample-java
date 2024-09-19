@@ -1,9 +1,9 @@
 name: Test java Windows zip issue
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
   
 

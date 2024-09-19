@@ -53,6 +53,8 @@ jobs:
         Invoke-WebRequest -Uri https://github.com/PowerShell/PowerShell/releases/download/v7.4.5/PowerShell-7.4.5-win-x64.msi -OutFile PowerShell-7.4.5-win-x64.msi
         Start-Process msiexec.exe -ArgumentList '/i PowerShell-7.4.5-win-x64.msi /quiet' -Wait
         Remove-Item -Force PowerShell-7.4.5-win-x64.msi
+    - name: Verify PowerShell Installation
+      run: pwsh -Command '$PSVersionTable.PSVersion'
 
     - name: Setup Java Corretto
       uses: actions/setup-java@v4

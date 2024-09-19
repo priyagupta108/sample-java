@@ -37,9 +37,9 @@
 name: Test of downloading corretto with actions/setup-java@v4
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
 
 jobs:

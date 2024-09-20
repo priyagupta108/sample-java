@@ -9,7 +9,8 @@ on:
 
 jobs:
   test:
-    runs-on: [self-hosted, winx64]
+    # runs-on: [self-hosted, winx64]
+    runs-on: [windows-latest, windows-2019]
     strategy:
       fail-fast: false
       matrix:

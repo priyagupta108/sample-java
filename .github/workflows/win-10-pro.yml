@@ -51,7 +51,7 @@ jobs:
         if: matrix.build-system == 'maven'
         run: |
           curl -O https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip
-          tar -xvf apache-maven-3.8.5-bin.zip
+          Expand-Archive -Path apache-maven-3.8.5-bin.zip -DestinationPath .
           echo "MAVEN_HOME=$(pwd)/apache-maven-3.8.5" >> $GITHUB_ENV
           echo "$(pwd)/apache-maven-3.8.5/bin" >> $GITHUB_PATH
 
@@ -59,7 +59,7 @@ jobs:
         if: matrix.build-system == 'sbt'
         run: |
           curl -L -o sbt.zip https://github.com/sbt/sbt/releases/download/v1.5.5/sbt-1.5.5.zip
-          tar -xvf sbt.zip
+          Expand-Archive -Path sbt.zip -DestinationPath .
           echo "SBT_HOME=$(pwd)/sbt" >> $GITHUB_ENV
           echo "$(pwd)/sbt/bin" >> $GITHUB_PATH
 

@@ -29,8 +29,15 @@ jobs:
           distribution: ${{ matrix.distribution }}
           java-version: '21'
           cache: ${{ matrix.build-system }}
+
+      - name: Install Chocolatey
+        run: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        shell: pwsh
+
       - name: Install unzip
-        run: apt-get install -y unzip
+        run: choco install unzip
+        shell: pwsh
+      
       - name: Download and Install Maven
         if: matrix.build-system == 'maven'
         run: |

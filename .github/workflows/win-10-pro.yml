@@ -34,7 +34,7 @@ jobs:
       
       - name: Download and Install Maven
         if: matrix.build-system == 'maven'
-        rrun: |
+        run: |
           curl -O https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip
           tar -xvf apache-maven-3.8.5-bin.zip
           echo "MAVEN_HOME=$(pwd)/apache-maven-3.8.5" >> $GITHUB_ENV

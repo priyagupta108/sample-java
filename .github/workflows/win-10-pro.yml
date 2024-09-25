@@ -24,19 +24,26 @@ jobs:
           java-version: '21'
           cache: ${{ matrix.build-system }}
 
-      - name: Install Chocolatey
+      - name: Setup Environment on Windows ARM64 Runner
+        shell: powershell
         run: |
-          if (-Not (Test-Path "C:\ProgramData\chocolatey")) {
-            Set-ExecutionPolicy Bypass -Scope Process -Force
-            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-            iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-          } else {
-            choco upgrade chocolatey -y
+          # Install Chocolatey if not already installed
+          if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+              Set-ExecutionPolicy Bypass -Scope Process -Force
+              [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+              iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+              echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
           }
-          echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
 
-      - name: Install curl
-        run: |
+          # Reinstall Chocolatey if previous installation is incomplete
+          if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+              Remove-Item -Recurse -Force C:\ProgramData\chocolatey
+              Set-ExecutionPolicy Bypass -Scope Process -Force
+              iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+              echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+          }
+
+          # Install curl
           choco install curl -y
           echo "C:\ProgramData\chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
 

@@ -29,7 +29,8 @@ jobs:
           distribution: ${{ matrix.distribution }}
           java-version: '21'
           cache: ${{ matrix.build-system }}
-
+      - name: Install unzip
+        run: sudo apt-get install -y unzip
       - name: Download and Install Maven
         if: matrix.build-system == 'maven'
         run: |

@@ -9,25 +9,25 @@ on:
 jobs:
   test:
     runs-on: [self-hosted, windows10-Enter]
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
+    strategy:
+      fail-fast: false
+      matrix:
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
        
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: cache clear
-        run: |
-          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-          mkdir -p "${{ runner.tool_cache }}"  
+      # - name: cache clear
+      #   run: |
+      #     mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #     mkdir -p "${{ runner.tool_cache }}"  
 
-      # - name: Set up Java
-      #   uses: priyagupta108/setup-java@fix-windows-archive-extraction
-      #   with:
-      #     distribution: ${{ matrix.distribution }}
-      #     java-version: '21'
+      - name: Set up Java
+        uses: priyagupta108/setup-java@fix-windows-archive-extraction
+        with:
+          distribution: ${{ matrix.distribution }}
+          java-version: '21'
           
 
      

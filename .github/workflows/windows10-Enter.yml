@@ -1,31 +1,37 @@
-name: Test distributions cache
+name: Test java Windows zip issue
 
 on:
-  # push:
-  #   branches:
-  #     - sapMachine
+  push:
+    branches:
+      - sapMachine
   workflow_dispatch:
+  
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows10-Enter]
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, windows-latest, macos-latest] # Include macos-latest for all except where overridden
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
         build-system: ['maven', 'gradle', 'sbt']
-        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell']
-        
     steps:
+      # - name: cache clear
+      #   run: |
+      #     mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #     mkdir -p "${{ runner.tool_cache }}"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: actions/setup-java@v4
+        uses: priyagupta108/setup-java@fix-windows-archive-extraction
+        # uses: actions/setup-java@main
         with:
           distribution: ${{ matrix.distribution }}
-          cache: ${{ matrix.build-system }}
           java-version: '21'
+          cache: ${{ matrix.build-system }}
+
 
       - name: Build with Maven
         if: matrix.build-system == 'maven'
@@ -41,3 +47,4 @@ jobs:
 
       - name: Verify Java version
         run: java -version
+

@@ -12,39 +12,39 @@ jobs:
     runs-on: [self-hosted, win-10-pro-x64]
     strategy:
       fail-fast: false
-      # matrix:
-      #   distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
-      #   build-system: ['maven', 'gradle', 'sbt']
+      matrix:
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
+        build-system: ['maven', 'gradle', 'sbt']
     steps:
-      - name: cache clear
-        run: |
-          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
-          mkdir -p "${{ runner.tool_cache }}"
+      # - name: cache clear
+      #   run: |
+      #     mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+      #     mkdir -p "${{ runner.tool_cache }}"
 
-      # - name: Checkout code
-      #   uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # - name: Set up Java
-      #   uses: priyagupta108/setup-java@fix-windows-archive-extraction
-      #   # uses: actions/setup-java@main
-      #   with:
-      #     distribution: ${{ matrix.distribution }}
-      #     java-version: '21'
-      #     cache: ${{ matrix.build-system }}
+      - name: Set up Java
+        uses: priyagupta108/setup-java@fix-windows-archive-extraction
+        # uses: actions/setup-java@main
+        with:
+          distribution: ${{ matrix.distribution }}
+          java-version: '21'
+          cache: ${{ matrix.build-system }}
 
 
-      # - name: Build with Maven
-      #   if: matrix.build-system == 'maven'
-      #   run: mvn -B package --file pom.xml 
+      - name: Build with Maven
+        if: matrix.build-system == 'maven'
+        run: mvn -B package --file pom.xml 
 
-      # - name: Build with Gradle
-      #   if: matrix.build-system == 'gradle'
-      #   run: ./gradlew build --no-daemon
+      - name: Build with Gradle
+        if: matrix.build-system == 'gradle'
+        run: ./gradlew build --no-daemon
 
-      # - name: Build with SBT
-      #   if: matrix.build-system == 'sbt'
-      #   run: sbt package
+      - name: Build with SBT
+        if: matrix.build-system == 'sbt'
+        run: sbt package
 
-      # - name: Verify Java version
-      #   run: java -version
+      - name: Verify Java version
+        run: java -version
 

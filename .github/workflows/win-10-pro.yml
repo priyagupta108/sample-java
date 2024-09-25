@@ -24,11 +24,19 @@ jobs:
           java-version: '21'
           cache: ${{ matrix.build-system }}
 
-      - name: Setup Environment on Windows ARM64 Runner
-        shell: powershell
+      - name: Install Chocolatey
         run: |
-         
-          # Install curl
+          if (-Not (Test-Path "C:\ProgramData\chocolatey")) {
+            Set-ExecutionPolicy Bypass -Scope Process -Force
+            [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+            iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+          } else {
+            choco upgrade chocolatey -y
+          }
+          echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+
+      - name: Install curl
+        run: |
           choco install curl -y
           echo "C:\ProgramData\chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
 

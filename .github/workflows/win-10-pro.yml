@@ -12,64 +12,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build-system: ['maven', 'sbt']
+        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
+
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: priyagupta108/setup-java@fix-windows-archive-extraction
+        uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
+          distribution: ${{ matrix.distribution }}
           java-version: '21'
-          cache: ${{ matrix.build-system }}
 
-      - name: Setup Environment on Windows ARM64 Runner
-        shell: powershell
-        run: |
-          # Install Chocolatey if not already installed
-          if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-              Set-ExecutionPolicy Bypass -Scope Process -Force
-              [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-              iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-              echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-          }
-
-          # Reinstall Chocolatey if previous installation is incomplete
-          if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-              Remove-Item -Recurse -Force C:\ProgramData\chocolatey
-              Set-ExecutionPolicy Bypass -Scope Process -Force
-              iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-              echo "C:\ProgramData\Chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-          }
-
-          # Install curl
-          choco install curl -y
-          echo "C:\ProgramData\chocolatey\bin" | Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
-
-      - name: Download and Install Maven
-        if: matrix.build-system == 'maven'
-        run: |
-          curl -O https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip
-          Expand-Archive -Path apache-maven-3.8.5-bin.zip -DestinationPath .
-          echo "MAVEN_HOME=$(pwd)/apache-maven-3.8.5" >> $GITHUB_ENV
-          echo "$(pwd)/apache-maven-3.8.5/bin" >> $GITHUB_PATH
-
-      - name: Download and Install sbt
-        if: matrix.build-system == 'sbt'
-        run: |
-          curl -L -o sbt.zip https://github.com/sbt/sbt/releases/download/v1.5.5/sbt-1.5.5.zip
-          Expand-Archive -Path sbt.zip -DestinationPath .
-          echo "SBT_HOME=$(pwd)/sbt" >> $GITHUB_ENV
-          echo "$(pwd)/sbt/bin" >> $GITHUB_PATH
-
-      - name: Build with Maven
-        if: matrix.build-system == 'maven'
-        run: mvn -B package --file pom.xml
-
-      - name: Build with SBT
-        if: matrix.build-system == 'sbt'
-        run: sbt package
-
-      - name: Verify Java version
-        run: java -version
+     

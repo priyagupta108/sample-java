@@ -5,7 +5,6 @@ on:
     branches:
       - sapMachine
   workflow_dispatch:
-  
 
 jobs:
   test:
@@ -26,16 +25,30 @@ jobs:
 
       - name: Set up Java
         uses: priyagupta108/setup-java@fix-windows-archive-extraction
-        # uses: actions/setup-java@main
         with:
           distribution: ${{ matrix.distribution }}
           java-version: '21'
           cache: ${{ matrix.build-system }}
 
+      - name: Download and Install Maven
+        if: matrix.build-system == 'maven'
+        run: |
+          curl -Lo maven.zip https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.zip
+          unzip maven.zip -d /opt
+          export M2_HOME=/opt/apache-maven-3.8.6
+          export PATH=$M2_HOME/bin:$PATH
+
+      - name: Download and Install sbt
+        if: matrix.build-system == 'sbt'
+        run: |
+          curl -Lo sbt.zip https://github.com/sbt/sbt/releases/download/v1.5.5/sbt-1.5.5.zip
+          unzip sbt.zip -d /opt
+          export SBT_HOME=/opt/sbt
+          export PATH=$SBT_HOME/bin:$PATH
 
       - name: Build with Maven
         if: matrix.build-system == 'maven'
-        run: mvn -B package --file pom.xml 
+        run: mvn -B package --file pom.xml
 
       - name: Build with Gradle
         if: matrix.build-system == 'gradle'
@@ -47,4 +60,3 @@ jobs:
 
       - name: Verify Java version
         run: java -version
-

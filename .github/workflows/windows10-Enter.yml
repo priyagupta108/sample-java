@@ -23,11 +23,11 @@ jobs:
           mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
           mkdir -p "${{ runner.tool_cache }}"  
 
-      - name: Set up Java
-        uses: priyagupta108/setup-java@fix-windows-archive-extraction
-        with:
-          distribution: ${{ matrix.distribution }}
-          java-version: '21'
+      # - name: Set up Java
+      #   uses: priyagupta108/setup-java@fix-windows-archive-extraction
+      #   with:
+      #     distribution: ${{ matrix.distribution }}
+      #     java-version: '21'
           
 
      

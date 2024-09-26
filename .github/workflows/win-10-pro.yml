@@ -9,10 +9,10 @@ on:
 jobs:
   test:
     runs-on: [self-hosted, win-10-pro-x64]
-    strategy:
-      fail-fast: false
-      matrix:
-        distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
 
     
     steps:
@@ -27,7 +27,7 @@ jobs:
         uses: priyagupta108/setup-java@fix-windows-archive-extraction
         with:
           distribution: 'zulu'
-          java-version: '21'
+          java-version: '11'
           architecture: 'x86'
 
      

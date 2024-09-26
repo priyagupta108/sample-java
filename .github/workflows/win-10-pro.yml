@@ -1,9 +1,9 @@
 name: Test java Windows zip issue
 
 on:
-  push:
-    branches:
-      - sapMachine
+  # push:
+  #   branches:
+  #     - sapMachine
   workflow_dispatch:
 
 jobs:

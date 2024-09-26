@@ -26,7 +26,8 @@ jobs:
       - name: Set up Java
         uses: priyagupta108/setup-java@fix-windows-archive-extraction
         with:
-          distribution: ${{ matrix.distribution }}
+          distribution: 'zulu'
           java-version: '21'
+          architecture: 'x86'
 
      

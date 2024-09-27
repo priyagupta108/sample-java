@@ -14,12 +14,12 @@ jobs:
         include:
           - os: windows-latest
             distribution: 'zulu'
-            java-version: '17'
+            java-version: '21'
             architecture: 'x64'
           - os: self-hosted
-            label: windows10-Enter
+            label: win-10-pro-x64
             distribution: 'zulu'
-            java-version: '17'
+            java-version: '21'
             architecture: 'x86'
     runs-on: ${{ matrix.os }}
     
@@ -43,7 +43,7 @@ jobs:
             java-version: '17'
             architecture: 'x64'
           - os: self-hosted
-            label: windows10-Enter
+            label: win-10-pro-x64
             distribution: 'zulu'
             java-version: '17'
             architecture: 'x86'

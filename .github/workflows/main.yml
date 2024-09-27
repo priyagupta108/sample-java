@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: [self-hosted, windows10-Enter]
+    runs-on: [self-hosted, win-10-pro-x64]
     # runs-on: ${{ matrix.os }}
     # strategy:
     #   fail-fast: false

@@ -7,7 +7,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  test-with-v4:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            distribution: 'zulu'
+            java-version: '17'
+            architecture: 'x64'
+          - os: self-hosted
+            label: windows10-Enter
+            distribution: 'zulu'
+            java-version: '17'
+            architecture: 'x86'
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: ${{ matrix.distribution }}
+          java-version: ${{ matrix.java-version }}
+          architecture: ${{ matrix.architecture }}
+  test-with-fix:
     strategy:
       fail-fast: false
       matrix:

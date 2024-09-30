@@ -10,6 +10,6 @@ jobs:
     - name: Set up Python 3.11.6
       uses: priya-kinthali/setup-python@test-930
       with:
-        python-version: '3.11'
+        python-version: '3.12'
     - name: Display Python version
       run: python --version

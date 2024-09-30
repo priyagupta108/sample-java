@@ -40,12 +40,12 @@ jobs:
         include:
           - os: windows-latest
             distribution: 'zulu'
-            java-version: '21'
+            java-version: '11'
             architecture: 'x64'
           - os: self-hosted
             label:  win-10-pro-x64
             distribution: 'zulu'
-            java-version: '21'
+            java-version: '11'
             architecture: 'x86'
     runs-on: ${{ matrix.os }}
     

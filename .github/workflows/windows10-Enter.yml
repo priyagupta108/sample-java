@@ -13,14 +13,23 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            distribution: 'zulu'
+            distribution: 'adopt'
             java-version: '17'
             architecture: 'x64'
+          - os: windows-latest
+            distribution: 'zulu'
+            java-version: '11'
+            architecture: 'x86'  
           - os: self-hosted
             label: win-10-pro-x64
             distribution: 'zulu'
             java-version: '17'
             architecture: 'x86'
+          - os: self-hosted
+            label: win-10-pro-x64
+            distribution: 'adopt'
+            java-version: '21'
+            architecture: 'x64'  
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -39,14 +48,23 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            distribution: 'zulu'
+            distribution: 'adopt'
             java-version: '11'
             architecture: 'x64'
+          - os: windows-latest
+            distribution: 'zulu'
+            java-version: '11'
+            architecture: 'x86'  
           - os: self-hosted
             label:  win-10-pro-x64
             distribution: 'zulu'
             java-version: '11'
             architecture: 'x86'
+          - os: self-hosted
+            label: win-10-pro-x64
+            distribution: 'adopt'
+            java-version: '17' 
+            architecture: 'x64'
     runs-on: ${{ matrix.os }}
     
     steps:

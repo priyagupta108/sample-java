@@ -21,12 +21,4 @@ jobs:
         distribution: 'sapmachine'
         java-version: '21'
 
-    - name: Build with Gradle
-      run: gradle build
-
-    - name: Publish to GitHub Packages
-      run: gradle publish
-      env:
-        USERNAME: ${{ github.actor }}
-        PASSWORD: ${{ secrets.GITHUB_TOKEN }}
     

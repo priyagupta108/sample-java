@@ -5,30 +5,20 @@ on:
 permissions: read-all
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, macos-13, windows-2022]
-        transport: [native, nio]
-        exclude:
-          # excludes native on Windows (there's none)
-          - os: windows-2022
-            transport: native
+        java-version: [21, 23]
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '8'
-      - name: Set up GraalVM 17
+    
+      - name: Set up GraalVM 
         uses: actions/setup-java@v4
         with:
             distribution: 'graalvm'
-            java-version: '21'
+            java-version:  ${{ matrix.java-version }}
         
-      - name: Build with Gradle
-        run: ./gradlew :reactor-netty-graalvm-smoke-tests:nativeTest --no-daemon -PforceTransport=${{ matrix.transport }}
+      

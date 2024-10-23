@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
             distribution: 'graalvm'
-            java-version: '17'
+            java-version: '21'
         
       - name: Build with Gradle
         run: ./gradlew :reactor-netty-graalvm-smoke-tests:nativeTest --no-daemon -PforceTransport=${{ matrix.transport }}

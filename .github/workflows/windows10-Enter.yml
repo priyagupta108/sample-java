@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, macos-13, windows-2022, ubuntu-latest, windows-latest, macos-latest]
-        java-version: [21, 23, '17.0.12']
+        java-version: [21, 23, 17.0.12, 17.0.13]
 
     steps:
       - uses: actions/checkout@v4

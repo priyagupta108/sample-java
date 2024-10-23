@@ -2,15 +2,14 @@ name: Adopt test https://github.com/actions/setup-java/issues/692
 
 on:
   push:
-permissions: read-all
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, ubuntu-latest, windows-latest, macos-latest]
-        # java-version: [21, 23, 17.0.12, 22]
+        os: [macos-13, ubuntu-latest, windows-latest, macos-latest, ubuntu-22.04]
+        java-version: [21, 17, 11]
 
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +18,6 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: 17
+          java-version: ${{ matrix.java-version }}
               
       

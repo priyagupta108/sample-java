@@ -1,4 +1,4 @@
-name: GraalVM smoke tests
+name: Adopt test https://github.com/actions/setup-java/issues/692
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'adoptium'
+          distribution: 'adopt'
           java-version: 17
               
       

@@ -1,5 +1,4 @@
 name: Adopt test https://github.com/actions/setup-java/issues/692
-
 on:
   push:
 jobs:

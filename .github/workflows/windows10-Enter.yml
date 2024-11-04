@@ -7,8 +7,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, ubuntu-latest, windows-latest, macos-latest, ubuntu-22.04]
-        java-version: [21, 17, 11]
+        os: [ubuntu-latest]
+        java-version: [17]
 
     steps:
       - uses: actions/checkout@v4
@@ -19,4 +19,5 @@ jobs:
           distribution: 'adopt'
           java-version: ${{ matrix.java-version }}
               
-      
+      - name: Build with Maven
+        run: mvn clean install

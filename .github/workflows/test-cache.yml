@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '9.0.4'
-          distribution: 'temurin'
+          distribution: 'zulu'
           
 
       - name: Verify Java version

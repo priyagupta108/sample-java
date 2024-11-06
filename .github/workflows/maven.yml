@@ -1,18 +1,23 @@
-name: Maven Build
+name: Java CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-java@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
       with:
         distribution: 'adopt'
         java-version: '17'
-    - name: Build with Maven
-      run: mvn package
-    - name: Run App
-      run: java -cp target/sample-java-1.0-SNAPSHOT.jar com.example.App
+
+    - name: Verify Java version
+      run: java -version
+
+    - name: Run Maven build
+      run: mvn clean install -X

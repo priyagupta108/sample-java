@@ -15,4 +15,4 @@ jobs:
     - name: Build with Maven
       run: mvn package
     - name: Run App
-      run: java -cp target/my-app-1.0-SNAPSHOT.jar com.example.App
+      run: java -cp target/sample-java-1.0-SNAPSHOT.jar com.example.App

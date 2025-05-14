@@ -61,6 +61,7 @@ jobs:
         with:
           distribution: ${{ matrix.distribution }}
           java-version: '21'
+          check-latest: true
   
 
       - name: Verify Java version

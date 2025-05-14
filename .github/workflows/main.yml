@@ -23,7 +23,7 @@ jobs:
           distribution: "jetbrains"
           java-package: "jdk"
           java-version: "21"
-          # check-latest: true
+          check-latest: false
 
       - name: Verify Java version
         run: java -version

@@ -60,7 +60,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: ${{ matrix.distribution }}
-          java-version: '21.0.7+12'
+          java-version: '21.0.7b968.13'
           check-latest: true
   
 

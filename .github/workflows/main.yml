@@ -8,7 +8,10 @@ on:
 
 jobs:
   setup-jbr:
-    runs-on: ubuntu-latest # You can also test on macOS or Windows
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - name: Checkout repository

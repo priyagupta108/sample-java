@@ -1,36 +1,26 @@
-name: Test java Windows zip issue
+name: Set up JBR Workflow
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
-
-  
+  workflow_dispatch: # Allows manual triggering of the workflow
 
 jobs:
-  test:
-    runs-on: [self-hosted, win-10-pro-x64]
-    # runs-on: ${{ matrix.os }}
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     # os: [windows-latest, windows-2019]
-    #     # distribution: [ 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
-        
+  setup-jbr:
+    runs-on: ubuntu-latest # You can also test on macOS or Windows
+
     steps:
-     - name: Remove existing _tool.old directory if it exists
-       shell: pwsh
-       run: |
-          if (Test-Path "C:\Users\priya\actions-runner\_work\_tool.old") {
-              Remove-Item -Recurse -Force "C:\Users\priya\actions-runner\_work\_tool.old"
-          }
-  
-     - name: Move _tool directory
-       shell: pwsh
-       run: mv "C:\Users\priya\actions-runner\_work\_tool" "C:\Users\priya\actions-runner\_work\_tool.old"
-  
-     - name: Create new _tool directory
-       shell: pwsh
-       run: mkdir -p "C:\Users\priya\actions-runner\_work\_tool"
-       
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JBR
+        uses: actions/setup-java@v4
+        with:
+          distribution: "jetbrains"
+          java-package: "jdk"
+          java-version: "21"
+          # check-latest: true
+
+      - name: Verify Java version
+        run: java -version

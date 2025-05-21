@@ -61,7 +61,7 @@ jobs:
         uses: priyagupta108/setup-java@test-829
         with:
           distribution: ${{ matrix.distribution }}
-          java-version: '22'
+          java-version: '21-ea'
           check-latest: true
   
 

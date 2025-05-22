@@ -42,9 +42,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     # runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
+    # strategy:
+    #   fail-fast: false
+      # matrix:
         # os: [windows-latest, windows-2019]
         # distribution: [ 'jetbrains' , 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
         

@@ -43,11 +43,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     # runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        # os: [windows-latest, windows-2019]
-        distribution: [ 'jetbrains' , 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     # os: [windows-latest, windows-2019]
+    #     # distribution: [ 'jetbrains' , 'adopt', 'zulu', 'temurin', 'corretto', 'liberica', 'oracle', 'microsoft', 'semeru', 'dragonwell', 'sapmachine', graalvm]
         
     steps:
       # - name: cache clear
@@ -59,11 +59,11 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Set up Java
-        uses: priyagupta108/setup-java@test-829
+        uses: priyagupta108/setup-java@829-change
         # uses: actions/setup-java@v4
         with:
-          distribution: ${{ matrix.distribution }}
-          # distribution: 'jetbrains'
+          # distribution: ${{ matrix.distribution }}
+          distribution: 'jetbrains'
           java-version: '21-ea'
           check-latest: true
   

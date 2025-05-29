@@ -64,8 +64,9 @@ jobs:
         # uses: actions/setup-java@v4
         with:
           # distribution: ${{ matrix.distribution }}
+          
           distribution: 'jetbrains'
-          java-version: '21-ea'
+          java-version: '17-ea'
           check-latest: true
   
 

@@ -26,6 +26,9 @@ jobs:
             21
             11
             17
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
+   
 
       - name: Verify JDK 8
         run: java -version

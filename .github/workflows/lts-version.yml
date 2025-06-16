@@ -1,4 +1,4 @@
-name: Test EA version
+name: Test LTS version
 
 on:
   push:
@@ -23,6 +23,8 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-version: '21'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
       - name: Verify Java version
         run: java -version

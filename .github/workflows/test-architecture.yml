@@ -25,7 +25,8 @@ jobs:
         distribution: 'jetbrains'
         java-version: ${{ matrix.java-version }}
         architecture: x86
-
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
     - name: Verify Java version
       run: java -version
 

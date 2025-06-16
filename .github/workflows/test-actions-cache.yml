@@ -14,9 +14,6 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm] # Include macos-latest for all except where overridden
         build-system: ['maven', 'gradle', 'sbt']
-        include:
-          - build-system: 'sbt'
-            os: macos-12 # Override to use macOS-12 specifically for SBT builds
         exclude:
           - build-system: 'sbt'
             os: macos-latest # Exclude macos-latest specifically for SBT builds
@@ -30,7 +27,8 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-version: '21'
-          
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
 
       - name: Cache Maven packages
         if: matrix.build-system == 'maven'

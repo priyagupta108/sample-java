@@ -31,6 +31,9 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-version: ${{ matrix.java }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
+  
       - run: java -version
       - run: javac -version
       

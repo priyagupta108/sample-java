@@ -24,6 +24,8 @@ jobs:
         distribution: 'jetbrains'
         java-version: '21'
         java-package: 'jre'
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
 
     - name: Verify Java version
       run: java -version

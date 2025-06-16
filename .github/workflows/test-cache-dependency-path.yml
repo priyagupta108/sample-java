@@ -13,9 +13,6 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm]
         build-system: ['maven', 'gradle', 'sbt']
-        include:
-          - build-system: 'sbt'
-            os: macos-12 # Override to use macOS-12 specifically for SBT builds
         exclude:
           - build-system: 'sbt'
             os: macos-latest # Exclude macos-latest specifically for SBT builds
@@ -32,6 +29,8 @@ jobs:
           java-version: '21'
           cache: 'maven'
           cache-dependency-path: 'pom.xml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
 
       - name: Set up Java with Gradle cache
         if: matrix.build-system == 'gradle'
@@ -43,6 +42,8 @@ jobs:
           cache-dependency-path: |
             *.gradle*
             **/gradle-wrapper.properties
+        env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
 
       - name: Set up Java with sbt cache
         if: matrix.build-system == 'sbt'
@@ -52,6 +53,9 @@ jobs:
           java-version: '21'
           cache: 'sbt'
           cache-dependency-path: build.sbt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
+  
 
       - name: Build with Maven
         if: matrix.build-system == 'maven'

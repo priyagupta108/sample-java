@@ -1,0 +1,28 @@
+name: Test EA version
+
+on:
+  push:
+    branches:
+      - jetbrains-test
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm] # Include macos-latest for all except where overridden
+       
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: priyagupta108/setup-java@jetbrains-fix-test
+        with:
+          distribution: 'jetbrains'
+          java-version: '21'
+
+      - name: Verify Java version
+        run: java -version

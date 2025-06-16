@@ -1,16 +1,17 @@
 name: Test cache option with dependency paths 'maven', 'gradle', 'sbt'
 on:
-  # push:
-  #   branches:
-  #     - sapMachine
+  push:
+    branches:
+      - jetbrains-test
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm]
         build-system: ['maven', 'gradle', 'sbt']
         include:
           - build-system: 'sbt'
@@ -25,18 +26,18 @@ jobs:
 
       - name: Set up Java with Maven cache
         if: matrix.build-system == 'maven'
-        uses: Shegox/setup-java@main
+        uses: priyagupta108/setup-java@jetbrains-fix-test
         with:
-          distribution: 'sapmachine'
+          distribution: 'jetbrains'
           java-version: '21'
           cache: 'maven'
           cache-dependency-path: 'pom.xml'
 
       - name: Set up Java with Gradle cache
         if: matrix.build-system == 'gradle'
-        uses: Shegox/setup-java@main
+        uses: priyagupta108/setup-java@jetbrains-fix-test
         with:
-          distribution: 'sapmachine'
+          distribution: 'jetbrains'
           java-version: '21'
           cache: 'gradle'
           cache-dependency-path: |
@@ -45,9 +46,9 @@ jobs:
 
       - name: Set up Java with sbt cache
         if: matrix.build-system == 'sbt'
-        uses: Shegox/setup-java@main
+        uses: priyagupta108/setup-java@jetbrains-fix-test
         with:
-          distribution: 'sapmachine'
+          distribution: 'jetbrains'
           java-version: '21'
           cache: 'sbt'
           cache-dependency-path: build.sbt

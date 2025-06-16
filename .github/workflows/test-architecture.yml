@@ -1,9 +1,9 @@
 name: Test architecture option
 
 on:
-  # push:
-  #   branches:
-  #     - sapMachine
+  push:
+    branches:
+      - jetbrains-test
 
   workflow_dispatch:
 
@@ -11,17 +11,18 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm]
         java-version: [11, 17, 21 ]
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up Java
-      uses: Shegox/setup-java@main
+      uses: priyagupta108/setup-java@jetbrains-fix-test
       with:
-        distribution: 'sapmachine'
+        distribution: 'jetbrains'
         java-version: ${{ matrix.java-version }}
         architecture: x86
 

@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm] # Include macos-latest for all except where overridden
-        ea: ['21.0.5-ea', '21-ea'] # Add EA versions to test
+        ea: ['21.0.5-ea', '21-ea', '17-ea'] # Add EA versions to test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

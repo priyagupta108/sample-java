@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm] # Include macos-latest for all except where overridden
-        lts: ['21', '17']
+        lts: ['21', '17', '11', '21.0.5', '17.0.9']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

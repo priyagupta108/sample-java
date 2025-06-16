@@ -63,7 +63,7 @@ jobs:
         with:
           # distribution: ${{ matrix.distribution }}
           distribution: 'jetbrains'
-          java-version: '21.05-ea'
+          java-version: '21.0.5-ea'
           check-latest: true
   
 

@@ -84,7 +84,7 @@ on:
 
 jobs:
   test:
-    runs-on: [self-hosted, windows10-Enter]
+    runs-on: ubuntu-latest
     # runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -103,7 +103,7 @@ jobs:
       
       - name: Set up Java
         # uses: priyagupta108/setup-java@winZip
-        uses: priyagupta108/setup-java@fix-windows-archive-extraction
+        uses: actions/setup-java@v4
         with:
           distribution: ${{ matrix.distribution }}
           java-version: '21'

@@ -38,7 +38,7 @@ jobs:
 
       - name: Cache Maven packages
         if: matrix.build-system == 'maven'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -46,7 +46,7 @@ jobs:
             ${{ runner.os }}-maven-    
       - name: Cache Gradle packages
         if: matrix.build-system == 'gradle'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
@@ -56,7 +56,7 @@ jobs:
            ${{ runner.os }}-gradle-
       - name: Cache SBT packages
         if: matrix.build-system == 'sbt'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.sbt

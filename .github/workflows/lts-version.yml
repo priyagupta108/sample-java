@@ -16,7 +16,7 @@ jobs:
         lts: ['21', '17', '11', '21.0.5', '17.0.9', '21.0', '17.0']
         exclude:
           - os: windows-11-arm
-            java-version: '11'
+            lts: '11'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

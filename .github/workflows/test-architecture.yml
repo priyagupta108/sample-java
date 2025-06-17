@@ -1,9 +1,9 @@
 name: Test architecture option
 
 on:
-  push:
-    branches:
-      - jetbrains-test
+  # push:
+  #   branches:
+  #     - jetbrains-test
 
   workflow_dispatch:
 

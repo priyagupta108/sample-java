@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Java ${{ matrix.java }}
-        uses: priyagupta108/setup-java@jetbrains-fix-test
+        uses: priyagupta108/setup-java@fix-JetBrains-install
         with:
           distribution: 'jetbrains'
           java-version: ${{ matrix.java }}

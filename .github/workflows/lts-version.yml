@@ -3,7 +3,7 @@ name: Test LTS version
 on:
   push:
     branches:
-      - jetbrains-test
+      - graalVm-test
   workflow_dispatch:
 
 jobs:
@@ -22,9 +22,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: priyagupta108/setup-java@fix-JetBrains-install
+        uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
         with:
-          distribution: 'jetbrains'
+          distribution: 'graalvm'
           java-version: ${{ matrix.lts }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

@@ -1,9 +1,9 @@
 name: Test architecture option
 
 on:
-  # push:
-  #   branches:
-  #     - jetbrains-test
+  push:
+    branches:
+      - graalVm-test
 
   workflow_dispatch:
 
@@ -22,7 +22,7 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v4
       with:
-        distribution: 'jetbrains'
+        distribution: 'graalvm'
         java-version: ${{ matrix.java-version }}
         architecture: x86
       env:

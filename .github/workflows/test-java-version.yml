@@ -3,7 +3,7 @@ name: Test Supported version syntax
 on:
   push:
     branches:
-      - jetbrains-test
+      - graalVm-test
 
   workflow_dispatch:
 
@@ -27,9 +27,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Java ${{ matrix.java }}
-        uses: priyagupta108/setup-java@fix-JetBrains-install
+        uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
         with:
-          distribution: 'jetbrains'
+          distribution: 'graalvm'
           java-version: ${{ matrix.java }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   

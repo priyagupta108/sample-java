@@ -2,7 +2,7 @@ name: Test cache option with dependency paths 'maven', 'gradle', 'sbt'
 on:
   push:
     branches:
-      - jetbrains-test
+      - graalVm-test
   workflow_dispatch:
 
 jobs:
@@ -29,9 +29,9 @@ jobs:
 
       - name: Set up Java with Maven cache
         if: matrix.build-system == 'maven'
-        uses: priyagupta108/setup-java@fix-JetBrains-install
+        uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
         with:
-          distribution: 'jetbrains'
+          distribution: 'graalvm'
           java-version: '21'
           cache: 'maven'
           cache-dependency-path: 'pom.xml'
@@ -40,9 +40,9 @@ jobs:
 
       - name: Set up Java with Gradle cache
         if: matrix.build-system == 'gradle'
-        uses: priyagupta108/setup-java@fix-JetBrains-install
+        uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
         with:
-          distribution: 'jetbrains'
+          distribution: 'graalvm'
           java-version: '21'
           cache: 'gradle'
           cache-dependency-path: |
@@ -53,9 +53,9 @@ jobs:
 
       - name: Set up Java with sbt cache
         if: matrix.build-system == 'sbt'
-        uses: priyagupta108/setup-java@fix-JetBrains-install
+        uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
         with:
-          distribution: 'jetbrains'
+          distribution: 'graalvm'
           java-version: '21'
           cache: 'sbt'
           cache-dependency-path: build.sbt

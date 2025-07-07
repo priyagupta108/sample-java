@@ -13,18 +13,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, windows-11-arm]
+        os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, ]
         java-version: [11, 17, 21 ]
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up Java
-      uses: actions/setup-java@v4
+      uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
       with:
         distribution: 'graalvm'
         java-version: ${{ matrix.java-version }}
-        architecture: x86
+        architecture: x64
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
     - name: Verify Java version

@@ -23,8 +23,8 @@ jobs:
         with:
           distribution: 'graalvm'
           java-version: |
-            '21'
-            '17.0.12'
+            21
+            17.0.12
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   
    

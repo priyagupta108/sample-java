@@ -7,7 +7,7 @@ on:
 
   workflow_dispatch:
 env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+   MY_NAME: 'Priya'
 
 jobs:
   test:

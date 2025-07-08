@@ -1,4 +1,4 @@
-name: Test architecture option
+name: Test env
 
 on:
   push:
@@ -6,6 +6,8 @@ on:
       - graalVm-test
 
   workflow_dispatch:
+env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
 
 jobs:
   test:
@@ -14,7 +16,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-13, ubuntu-24.04-arm, ]
-  
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -23,10 +24,10 @@ jobs:
       uses: mahabaleshwars/setup-java@fix/graalvm-api-rate-limit
       with:
         distribution: 'graalvm'
-        java-version: 21
-        architecture: x64
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        java-version: '21'
+        check-latest: true
+    
+
     - name: Verify Java version
       run: java -version
 

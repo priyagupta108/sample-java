@@ -1,0 +1,24 @@
+name: Test Setup Java corretto PR#767
+
+on: [push, pull_request]
+
+jobs:
+  test-setup-java:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .tool-versions with ASDF format
+        run: |
+          echo "java corretto-8.322.06.4" > .tool-versions
+          cat .tool-versions
+
+      - name: Test setup-java from PR branch
+        uses: actions/setup-java@refs/pull/767/merge
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Verify Java installation
+        run: java -version

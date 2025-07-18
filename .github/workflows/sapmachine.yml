@@ -15,7 +15,7 @@ jobs:
           cat .tool-versions
 
       - name: Test setup-java from PR branch
-        uses: actions/setup-java@refs/pull/767/merge
+        uses: aparnajyothi-y/setup-java@toolversions-regex-update
         with:
           distribution: 'sapmachine'
           java-version-file: '.tool-versions'

@@ -17,8 +17,8 @@ jobs:
       - name: Test setup-java from PR branch
         uses: actions/setup-java@refs/pull/767/merge
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: 'liberica'
+          java-version-file: '.tool-versions'
 
       - name: Verify Java installation
         run: java -version

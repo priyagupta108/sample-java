@@ -1,17 +1,37 @@
-name: Test Setup Java adoptopenjdk PR#767
+name: Test AdoptOpenJDK Java Versions with .tool-versions
 
 on: [push, pull_request]
 
 jobs:
-  test-setup-java:
+  test-matrix:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+          # AdoptOpenJDK
+          - "adoptopenjdk-8.0.181+13"
+          - "adoptopenjdk-8.0.262+10"
+          - "adoptopenjdk-17.0.8+101"
+          - "adoptopenjdk-18.0.1+10"
+          - "adoptopenjdk-19.0.0-beta+36.0.202208190932"
+          - "adoptopenjdk-21.0.0+35.0.LTS"
+          - "adoptopenjdk-21.0.6+7.0.LTS"
+          - "adoptopenjdk-21.0.7+6.0.LTS"
+          - "adoptopenjdk-jre-8.0.222+10.1"
+          - "adoptopenjdk-jre-8.0.292+10"
+          - "adoptopenjdk-jre-9.0.0+181"
+          - "adoptopenjdk-jre-19.0.0-beta+36.0.202208190932"
+          - "adoptopenjdk-jre-21.0.5+11.0.LTS"
+          - "adoptopenjdk-jre-openj9-8.0.265+1.openj9-0.21.0"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up .tool-versions with ASDF format
         run: |
-          echo "java adoptopenjdk-11.0.15+10" > .tool-versions
+          echo "java ${{ matrix.java-version }}" > .tool-versions
           cat .tool-versions
 
       - name: Test setup-java from PR branch

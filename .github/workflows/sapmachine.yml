@@ -1,17 +1,38 @@
-name: Test Setup Java sapmachine PR#767
+name: Test SAPMachine Java Versions with .tool-versions
 
 on: [push, pull_request]
 
 jobs:
   test-setup-java:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+         # SAPMachine
+          - "sapmachine-0.0.0"
+          - "sapmachine-17.0.3.0.1"
+          - "sapmachine-17.0.4"
+          - "sapmachine-17.0.4-snapshot.0"
+          - "sapmachine-18.0.2.1"
+          - "sapmachine-19"
+          - "sapmachine-19-snapshot"
+          - "sapmachine-20-snapshot.35"
+          - "sapmachine-24.0.2"
+          - "sapmachine-jre-0.0.0"
+          - "sapmachine-jre-11.0.19-snapshot.1"
+          - "sapmachine-jre-14.0.2"
+          - "sapmachine-jre-15"
+          - "sapmachine-jre-17.0.4-snapshot.0"
+          - "sapmachine-jre-24.0.2"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up .tool-versions with ASDF format
         run: |
-          echo "java sapmachine-17" > .tool-versions
+          echo "java ${{ matrix.java-version }}" > .tool-versions
           cat .tool-versions
 
       - name: Test setup-java from PR branch

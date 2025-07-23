@@ -1,17 +1,31 @@
-name: Test Setup Java semeru PR#767
+name: Test Semeru Java Versions with .tool-versions
 
 on: [push, pull_request]
 
 jobs:
   test-setup-java:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+          - "semeru-jre-openj9-8u302-b08_openj9-0.27.0"
+          - "semeru-jre-openj9-23+37_openj9-0.47.0"
+          - "semeru-jre-openj9-11.0.15+10_openj9-0.32.0"
+          - "semeru-jre-openj9-11.0.16.1+1_openj9-0.33.1"
+          - "semeru-openj9-23+37_openj9-0.47.0"
+          - "semeru-openj9-11.0.15+10_openj9-0.32.0"
+          - "semeru-openj9-11.0.16.1+1_openj9-0.33.1"
+          - "semeru-jre-openj9-23.0.1+11_openj9-0.49.0-m2"
+          - "semeru-openj9-23.0.1+11_openj9-0.49.0-m2"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up .tool-versions with ASDF format
         run: |
-          echo "java semeru-jre-openj9-23+37_openj9-0.47.0" > .tool-versions
+          echo "java ${{ matrix.java-version }}" > .tool-versions
           cat .tool-versions
 
       - name: Test setup-java from PR branch

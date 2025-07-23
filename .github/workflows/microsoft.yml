@@ -1,17 +1,25 @@
-name: Test Setup Java microsoft PR#767
+name: Test Microsoft Java Versions with .tool-versions
 
 on: [push, pull_request]
 
 jobs:
   test-setup-java:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+         # Microsoft
+          - "microsoft-11.0.11.9.1"
+          - "microsoft-17.35.1"
+          - "microsoft-21.0.0"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up .tool-versions with ASDF format
         run: |
-          echo "java microsoft-11.0.15" > .tool-versions
+          echo "java ${{ matrix.java-version }}" > .tool-versions
           cat .tool-versions
 
       - name: Test setup-java from PR branch

@@ -1,17 +1,35 @@
-name: Test Setup Java zulu PR#767
+name: Test Zulu Java Versions with .tool-versions
 
 on: [push, pull_request]
 
 jobs:
   test-setup-java:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+         # Zulu
+          - "zulu-7.54.0.13_1"
+          - "zulu-8.86.0.25"
+          - "zulu-9.0.0.15"
+          - "zulu-10.3+5"
+          - "zulu-11.80.21"
+          - "zulu-24.28.83"
+          - "zulu-crac-24.28.87"
+          - "zulu-javafx-8.86.0.25"
+          - "zulu-javafx-20.32.11_1"
+          - "zulu-javafx-24.30.13"
+          - "zulu-jre-8.86.0.25"
+          - "zulu-jre-javafx-24.30.13"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up .tool-versions with ASDF format
         run: |
-          echo "java zulu-11.43.1017" > .tool-versions
+          echo "java ${{ matrix.java-version }}" > .tool-versions
           cat .tool-versions
 
       - name: Test setup-java from PR branch

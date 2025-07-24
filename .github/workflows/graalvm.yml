@@ -10,15 +10,13 @@ jobs:
       matrix:
         java-version:
            # GraalVM
-          - "graalvm-19.2.1"
-          - "graalvm-19.3.0.2+java11"
-          - "graalvm-20.3.6+java11"
-          - "graalvm-21.3.3.1+java17"
-          - "graalvm-22.3.3+java17"
+         
           - "graalvm-community-24.0.2"
           - "oracle-graalvm-17.0.12"
           - "oracle-graalvm-21"
           - "oracle-graalvm-24.0.2"
+          - "graalvm-community-17.0.7"
+          - "graalvm-22.1.0+java11"
 
     steps:
       - name: Checkout code

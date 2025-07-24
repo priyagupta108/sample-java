@@ -17,6 +17,7 @@ jobs:
           - "jetbrains-jre-17.0.14b1367.22"
           - "jetbrains-jre-21.0.2b346.3"
           - "jetbrains-jre-21.0.7b1038.58"
+          - "jetbrains-jre-17.0.4.1b646.8"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

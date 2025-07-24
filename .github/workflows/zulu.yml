@@ -10,18 +10,19 @@ jobs:
       matrix:
         java-version:
          # Zulu
-          - "zulu-7.54.0.13_1"
-          - "zulu-8.86.0.25"
-          - "zulu-9.0.0.15"
-          - "zulu-10.3+5"
-          - "zulu-11.80.21"
-          - "zulu-24.28.83"
-          - "zulu-crac-24.28.87"
-          - "zulu-javafx-8.86.0.25"
-          - "zulu-javafx-20.32.11_1"
-          - "zulu-javafx-24.30.13"
-          - "zulu-jre-8.86.0.25"
-          - "zulu-jre-javafx-24.30.13"
+          - zulu-javafx-11.45.27
+          - zulu-jre-11.45.27
+          - zulu-jre-javafx-11.45.27
+          - zulu-8.52.0.23
+          - zulu-javafx-8.52.0.23
+          - zulu-jre-8.52.0.23
+          - zulu-jre-javafx-8.52.0.23
+          # Newer versions
+          - zulu-8.62.0.19_1
+          - zulu-11.66.15_1
+          - zulu-javafx-11.66.15_1
+          - zulu-jre-11.66.15_1
+          - zulu-jre-javafx-11.66.15_1
 
     steps:
       - name: Checkout code

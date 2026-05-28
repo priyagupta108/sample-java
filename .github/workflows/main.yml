@@ -116,6 +116,7 @@ name: Reproduce setup-java JBR version parsing issue with debug logs
 
 on:
   workflow_dispatch:
+  push: 
 
 jobs:
   repro:
